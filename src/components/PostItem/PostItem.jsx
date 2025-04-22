@@ -6,6 +6,10 @@ import CommentList from '../CommentList/CommentList'
 import Textarea from '../Textarea/Textarea'
 import NavBar from '../NavBar/NavBar'
 import { format } from 'date-fns'
+import removeIcon from '/x-circle.svg'
+import PublishIcon from '/plus-square.svg'
+import unpublishIcon from '/check-square.svg'
+import editFileIcon from '/edit-file.svg'
 
 const usePostItemData = (postId, newComment, deletedCommentId) => {
     const [postItemData, setPostItemData] = useState(null)
@@ -34,6 +38,7 @@ function PostItem() {
     const [comment, setComment] = useState('')
 
     const [show, setShow] = useState(true)
+    const [publishStatus, setPublishStatus] = useState(true)
 
     const { itemId } = useParams()
 
@@ -43,6 +48,10 @@ function PostItem() {
 
     const handleCommentTextarea = (e) => {
         setComment(e.target.value)
+    }
+
+    const handlePublishStatus = () => {
+        setPublishStatus(!publishStatus)
     }
 
     const handleCommentPost = async () => {
@@ -90,6 +99,21 @@ function PostItem() {
             </div>
         )
 
+        const handleRemovePost = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/${itemId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                const data = await response.json()
+                console.log(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
         const createdAt = format(new Date(postItemData.createdAt), "MMMM dd, yyyy")
 
     return (
@@ -104,22 +128,75 @@ function PostItem() {
                         <p>Posted on: {createdAt}</p>
                     </div>
                     <p>{postItemData.body}</p>
-                    <button
-                        onClick={handleCommentDisplay}
-                        className="flex cursor-pointer items-center gap-1.5"
-                    >
-                        <img
-                            className="h-auto w-3.5"
-                            src={commentIcon}
-                            alt="comment icon"
-                        />
-                        <p>
-                            {postItemData._count.comments}{' '}
-                            {postItemData._count.comments > 1
-                                ? 'Comments'
-                                : 'Comment'}
-                        </p>
-                    </button>
+                    
+                    
+                    <div className="flex justify-between gap-20 font-extralight">
+                <button
+                    type="button"
+                    onClick={handleCommentDisplay}
+                    className="flex cursor-pointer items-center gap-1.5"
+                >
+                    <img
+                        className="h-auto w-3.5"
+                        src={commentIcon}
+                        alt="comment icon"
+                    />
+                    <p>
+                        {postItemData._count.comments}{' '}
+                        {postItemData._count.comments > 1
+                            ? 'Comments'
+                            : 'Comment'}
+                    </p>
+                </button>
+                <button
+                    className="flex cursor-pointer items-center gap-1.5"
+                    type="button"
+                >
+                    <img
+                        className="h-auto w-3.5"
+                        src={editFileIcon}
+                        alt="comment icon"
+                    />
+                    <p>Edit</p>
+                </button>
+                <button
+                    className="flex cursor-pointer items-center gap-1.5"
+                    type="button"
+                    onClick={handlePublishStatus}
+                >
+                    {publishStatus ? (
+                        <>
+                            <img
+                                className="h-auto w-3.5"
+                                src={unpublishIcon}
+                                alt="comment icon"
+                            />
+                            <p>Unpublish</p>
+                        </>
+                    ) : (
+                        <>
+                            <img
+                                className="h-auto w-3.5"
+                                src={PublishIcon}
+                                alt="comment icon"
+                            />
+                            <p>Publish</p>
+                        </>
+                    )}
+                </button>
+                <button
+                    onClick={handleRemovePost}
+                    className="flex cursor-pointer items-center gap-1.5"
+                    type="button"
+                >
+                    <img
+                        className="h-auto w-3.5"
+                        src={removeIcon}
+                        alt="comment icon"
+                    />
+                    <p>Remove</p>
+                </button>
+            </div>
 
                     {show && (
                         <div className="flex flex-col gap-3">
