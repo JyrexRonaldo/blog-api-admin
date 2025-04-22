@@ -4,8 +4,10 @@ import PostDataContext from '../PostDataContext/PostDataContext'
 import { useContext } from 'react'
 import CommentList from '../CommentList/CommentList'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Posts() {
+    const navigate = useNavigate()
     const {
         postsData,
         error,
@@ -51,9 +53,13 @@ function Posts() {
 
     console.log(localStorage.getItem('userId'))
 
+    const handleCreatePost = () => {
+        navigate('/new')
+    }
+
     return (
         <div className="mt-2 flex w-180 flex-col gap-5 self-center">
-            {!localStorage.getItem('userId') && (
+            {/* {!localStorage.getItem('userId') && (
                 <p className="self-center bg-amber-950/70 px-5 py-2">
                     You are browsing as a guest.{' '}
                     <Link to={'/login'} className="text-blue-500">
@@ -62,7 +68,16 @@ function Posts() {
                     to comment and interact with posts.
                 </p>
             )}
-            <h1 className="text-4xl font-extrabold">Posts</h1>
+            <h1 className="text-4xl font-extrabold">Posts</h1> */}
+            <div className="flex justify-between">
+                <h1 className="text-4xl font-extrabold">Posts</h1>
+                <button
+                    className="rounded-[8px] bg-blue-600 px-3.5 py-1"
+                    onClick={handleCreatePost}
+                >
+                    Create a Post
+                </button>
+            </div>
             {postCards}
         </div>
     )

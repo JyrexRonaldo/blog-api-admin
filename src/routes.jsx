@@ -4,6 +4,7 @@ import LoginForm from './components/LoginForm/LoginForm'
 import RegisterForm from './components/RegisterForm/RegisterForm'
 import Posts from './components/Posts/Posts'
 import PostItem from './components/PostItem/PostItem'
+import CreatePost from './components/CreatePost/CreatePost'
 
 const routes = [
     {
@@ -29,6 +30,10 @@ const routes = [
         path: '/:itemId',
         element: <PostItem />,
         errorElement: <ErrorPage />,
+    },
+    {
+        path: '/new',
+        element: <CreatePost />,
     },
 ]
 
