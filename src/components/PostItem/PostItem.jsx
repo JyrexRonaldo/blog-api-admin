@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Comment from '../Comment/Comment'
 import commentIcon from '/commentIcon.svg'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link , useNavigate } from 'react-router-dom'
 import CommentList from '../CommentList/CommentList'
 import Textarea from '../Textarea/Textarea'
 import NavBar from '../NavBar/NavBar'
@@ -41,6 +41,8 @@ function PostItem() {
     const [publishStatus, setPublishStatus] = useState(true)
 
     const { itemId } = useParams()
+
+    const navigate = useNavigate()
 
     const handleCommentDisplay = () => {
         setShow(!show)
@@ -109,6 +111,7 @@ function PostItem() {
                 })
                 const data = await response.json()
                 console.log(data)
+                navigate("/")
             } catch (error) {
                 console.log(error)
             }
