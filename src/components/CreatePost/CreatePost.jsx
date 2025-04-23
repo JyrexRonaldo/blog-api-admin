@@ -5,7 +5,7 @@ import NavBar from '../NavBar/NavBar'
 function CreatePost() {
     const [postTitle, setPostTitle] = useState('')
     const [postBody, setPostBody] = useState('')
-    const [publishStatus, setPublishStatus] = useState('UNPUBLISH')
+    const [publishStatus, setPublishStatus] = useState(false)
     const navigate = useNavigate()
 
     const handleCancel = () => {
@@ -79,8 +79,8 @@ function CreatePost() {
                             value={publishStatus}
                             onChange={handlePublishStatusSelect}
                         >
-                            <option value="UNPUBLISH">No</option>
-                            <option value="PUBLISH">Yes</option>
+                            <option value={false}>No</option>
+                            <option value={true}>Yes</option>
                         </select>
                     </div>
 
