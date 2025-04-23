@@ -28,6 +28,7 @@ function LoginForm() {
             console.log(data)
             localStorage.setItem('userToken', `${data.token}`)
             localStorage.setItem('userId', `${data.userId}`)
+            localStorage.setItem('userRole', `${data.userRole}`)
             navigate('/')
         } catch (error) {
             console.log(error)

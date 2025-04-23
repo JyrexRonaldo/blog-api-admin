@@ -41,7 +41,7 @@ function Comment({
             const data = await response.json()
             console.log(data)
             // state setter serves the purposes of triggering a refetch
-            setDeletedCommentId({...data})
+            setDeletedCommentId({ ...data })
             setShow(null)
         } catch (error) {
             console.log(error)
@@ -71,15 +71,15 @@ function Comment({
             )
             const data = await response.json()
             console.log(data)
-            setDeletedCommentId({...data.deleted})
+            setDeletedCommentId({ ...data.deleted })
         } catch (error) {
             console.log(error)
         }
     }
 
-    createdAt = format(new Date(createdAt), "MMMM dd, yyyy")
+    createdAt = format(new Date(createdAt), 'MMMM dd, yyyy')
 
-    const allowInteraction =  +localStorage.getItem("userId") === authorId
+    const allowInteraction = +localStorage.getItem('userId') === authorId
 
     return (
         <div>
@@ -91,22 +91,25 @@ function Comment({
                     </div>
                     <p className="text-[14px]">{comment}</p>
                 </div>
-                { allowInteraction && <div className="flex gap-3.5">
-                    <button onClick={handleEdit}>
-                        <img
-                            className="h-auto w-3.5 cursor-pointer"
-                            src={editIcon}
-                            alt="edit-icon"
-                        />
-                    </button>
-                    <button onClick={handleDelete}>
-                        <img
-                            className="h-auto w-3.5 cursor-pointer"
-                            src={deleteIcon}
-                            alt="comment-icon"
-                        />
-                    </button>
-                </div>}
+                {(localStorage.getItem('userRole') === 'ADMIN' ||
+                    allowInteraction) && (
+                    <div className="flex gap-3.5">
+                        <button onClick={handleEdit}>
+                            <img
+                                className="h-auto w-3.5 cursor-pointer"
+                                src={editIcon}
+                                alt="edit-icon"
+                            />
+                        </button>
+                        <button onClick={handleDelete}>
+                            <img
+                                className="h-auto w-3.5 cursor-pointer"
+                                src={deleteIcon}
+                                alt="comment-icon"
+                            />
+                        </button>
+                    </div>
+                )}
             </div>
             {showId === show && (
                 <Textarea
