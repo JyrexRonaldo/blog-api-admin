@@ -44,6 +44,12 @@ function PostItem() {
 
     const navigate = useNavigate()
 
+    const { postItemData, error, loading } = usePostItemData(
+        itemId,
+        newComment,
+        deletedCommentId
+    )
+
     const handleCommentDisplay = () => {
         setShow(!show)
     }
@@ -81,12 +87,6 @@ function PostItem() {
             console.log(error)
         }
     }
-
-    const { postItemData, error, loading } = usePostItemData(
-        itemId,
-        newComment,
-        deletedCommentId
-    )
 
     if (loading)
         return (

@@ -41,6 +41,7 @@ function CreatePost() {
 
             const data = await response.json()
             console.log(data)
+            navigate('/')
         } catch (error) {
             console.log(error)
         }
