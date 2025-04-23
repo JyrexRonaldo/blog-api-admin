@@ -16,7 +16,7 @@ function LoginForm() {
 
     const handleLoginButton = async () => {
         try {
-            const response = await fetch('http://localhost:3000/auth/log-in', {
+            const response = await fetch(`${import.meta.env.VITE_HOME_DOMAIN}/auth/log-in`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

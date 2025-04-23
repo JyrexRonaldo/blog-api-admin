@@ -17,7 +17,7 @@ const usePostItemData = (postId, newComment, deletedCommentId) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch(`http://localhost:3000/${postId}`)
+        fetch(`${import.meta.env.VITE_HOME_DOMAIN}/${postId}`)
             .then((response) => {
                 if (response.status >= 400) {
                     throw new Error('server error')
@@ -60,7 +60,7 @@ function PostItem() {
     const handlePublishStatus = async () => {
         try {
             const response = await fetch(
-                `http://localhost:3000/${postItemData.id}`,
+                `${import.meta.env.VITE_HOME_DOMAIN}/${postItemData.id}`,
                 {
                     method: 'PUT',
                     headers: {
@@ -87,7 +87,7 @@ function PostItem() {
     const handleCommentPost = async () => {
         try {
             const response = await fetch(
-                `http://localhost:3000/:${itemId}/comments`,
+                `${import.meta.env.VITE_HOME_DOMAIN}/:${itemId}/comments`,
                 {
                     method: 'POST',
                     headers: {
@@ -125,7 +125,7 @@ function PostItem() {
 
     const handleRemovePost = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/${itemId}`, {
+            const response = await fetch(`${import.meta.env.VITE_HOME_DOMAIN}/${itemId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

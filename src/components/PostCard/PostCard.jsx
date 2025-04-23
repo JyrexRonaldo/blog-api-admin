@@ -41,7 +41,7 @@ function PostCard({
         console.log(e.target.dataset.userId)
         try {
             const response = await fetch(
-                `http://localhost:3000/:${postId}/comments`,
+                `${import.meta.env.VITE_HOME_DOMAIN}/:${postId}/comments`,
                 {
                     method: 'POST',
                     headers: {

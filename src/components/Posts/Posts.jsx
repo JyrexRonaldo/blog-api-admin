@@ -30,7 +30,6 @@ function Posts() {
             </div>
         )
 
-    console.log(postsData)
 
     const postCards = postsData
         .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
@@ -51,14 +50,12 @@ function Posts() {
             )
         })
 
-    console.log(localStorage.getItem('userId'))
-
     const handleCreatePost = () => {
         navigate('/new')
     }
 
     const handleViewAllPosts = () => {
-        navigate("/allposts")
+        navigate('/allposts')
     }
 
     return (

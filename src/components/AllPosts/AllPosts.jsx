@@ -10,7 +10,7 @@ const usePostsData = (newComment, deletedCommentId) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch('http://localhost:3000/allposts')
+        fetch(`${import.meta.env.VITE_HOME_DOMAIN}/allposts`)
             .then((response) => {
                 if (response.status >= 400) {
                     throw new Error('server error')

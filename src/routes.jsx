@@ -1,6 +1,6 @@
 import App from './components/App/App'
 import ErrorPage from './components/ErrorPage/ErrorPage'
-import LoginForm from './components/LoginForm/LoginForm'
+import LoginForm from './components/LogInForm/LoginForm'
 import RegisterForm from './components/RegisterForm/RegisterForm'
 import Posts from './components/Posts/Posts'
 import PostItem from './components/PostItem/PostItem'

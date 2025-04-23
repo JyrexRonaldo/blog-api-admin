@@ -25,7 +25,7 @@ function Comment({
     const handleCommentEdit = async () => {
         try {
             const response = await fetch(
-                `http://localhost:3000/${postId}/comments/${commentId}`,
+                `${import.meta.env.VITE_HOME_DOMAIN}/${postId}/comments/${commentId}`,
                 {
                     method: 'PUT',
                     headers: {
@@ -58,7 +58,7 @@ function Comment({
     const handleDelete = async () => {
         try {
             const response = await fetch(
-                `http://localhost:3000/${postId}/comments/${commentId}`,
+                `${import.meta.env.VITE_HOME_DOMAIN}/${postId}/comments/${commentId}`,
                 {
                     method: 'DELETE',
                     headers: {

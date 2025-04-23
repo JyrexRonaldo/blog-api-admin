@@ -16,7 +16,7 @@ function RegisterForm() {
 
     const handleRegisterButton = async () => {
         try {
-            const response = await fetch('http://localhost:3000/auth/sign-up', {
+            const response = await fetch(`${import.meta.env.VITE_HOME_DOMAIN}/auth/sign-up`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
