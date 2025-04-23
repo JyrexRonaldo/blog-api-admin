@@ -57,18 +57,12 @@ function Posts() {
         navigate('/new')
     }
 
+    const handleViewAllPosts = () => {
+        navigate("/allposts")
+    }
+
     return (
         <div className="mt-2 flex w-180 flex-col gap-5 self-center">
-            {/* {!localStorage.getItem('userId') && (
-                <p className="self-center bg-amber-950/70 px-5 py-2">
-                    You are browsing as a guest.{' '}
-                    <Link to={'/login'} className="text-blue-500">
-                        Log in
-                    </Link>{' '}
-                    to comment and interact with posts.
-                </p>
-            )}
-            <h1 className="text-4xl font-extrabold">Posts</h1> */}
             <div className="flex justify-between">
                 <h1 className="text-4xl font-extrabold">Posts</h1>
                 <button
@@ -76,6 +70,12 @@ function Posts() {
                     onClick={handleCreatePost}
                 >
                     Create a Post
+                </button>
+                <button
+                    className="rounded-[8px] bg-blue-600 px-3.5 py-1"
+                    onClick={handleViewAllPosts}
+                >
+                    View all Posts
                 </button>
             </div>
             {postCards}

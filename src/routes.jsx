@@ -5,6 +5,7 @@ import RegisterForm from './components/RegisterForm/RegisterForm'
 import Posts from './components/Posts/Posts'
 import PostItem from './components/PostItem/PostItem'
 import CreatePost from './components/CreatePost/CreatePost'
+import AllPosts from './components/AllPosts/AllPosts'
 
 const routes = [
     {
@@ -34,6 +35,11 @@ const routes = [
     {
         path: '/new',
         element: <CreatePost />,
+    },
+    {
+        path: '/allposts',
+        element: <AllPosts />,
+        errorElement: <ErrorPage />,
     },
 ]
 
