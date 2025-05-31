@@ -147,7 +147,7 @@ function PostItem() {
     return (
         <>
             <NavBar>
-                <div className="mt-2 flex w-180 flex-col gap-3 self-center rounded-[12px] bg-neutral-800 p-5.5">
+                <div className="mx-5 mt-2 flex max-w-180 flex-col gap-3 self-center rounded-[12px] bg-neutral-800 p-5.5">
                     <p className="text-4xl font-extrabold">
                         {postItemData.title}
                     </p>

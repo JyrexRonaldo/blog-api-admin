@@ -38,7 +38,7 @@ function NavBar({ children }) {
 
     return (
         <div className="flex min-h-full flex-col bg-neutral-900 pb-20 text-white">
-            <nav className="flex h-20 items-center justify-around">
+            <nav className="flex min-h-20 items-center justify-around">
                 <Link to="/">
                     <p className="text-3xl font-extrabold text-blue-500">
                         OdinBlog
