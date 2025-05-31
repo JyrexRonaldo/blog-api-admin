@@ -125,12 +125,15 @@ function PostItem() {
 
     const handleRemovePost = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_HOME_DOMAIN}/${itemId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
+            const response = await fetch(
+                `${import.meta.env.VITE_HOME_DOMAIN}/${itemId}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
             const data = await response.json()
             console.log(data)
             navigate('/')
@@ -152,8 +155,9 @@ function PostItem() {
                         <p>{postItemData.author.username}</p>
                         <p>Posted on: {createdAt}</p>
                     </div>
-                    <p>{postItemData.body}</p>
-
+                    <p
+                        dangerouslySetInnerHTML={{ __html: postItemData.body }}
+                    ></p>
                     <div className="flex justify-between gap-20 font-extralight">
                         <button
                             type="button"

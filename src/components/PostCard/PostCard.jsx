@@ -64,10 +64,10 @@ function PostCard({
         }
     }
 
-    dateCreated = format( new Date(dateCreated), "MMMM dd, yyyy")
+    dateCreated = format(new Date(dateCreated), 'MMMM dd, yyyy')
 
     return (
-        <div className="flex flex-col gap-3 rounded-[12px] bg-neutral-800 p-5.5">
+        <div className="flex flex-col gap-3 rounded-[12px] bg-neutral-800 p-5.5 transition duration-300 hover:-translate-y-1 hover:bg-neutral-700">
             <div className="flex gap-3.5">
                 <p className="text-[0.8rem] font-extrabold">{authorName}</p>
                 <p className="text-[0.8rem] font-extralight">{dateCreated}</p>
