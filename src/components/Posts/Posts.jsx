@@ -60,8 +60,8 @@ function Posts() {
 
     return (
         <div className="mx-5 mt-2 flex max-w-180 flex-col gap-5 self-center">
-            <div className="flex justify-between">
-                <h1 className="text-4xl font-extrabold">Posts</h1>
+            <div className="flex justify-between max-sm:grid grid-cols-2 max-sm:grid-rows-2 max-sm:gap-y-3.5 max-sm:justify-items-start">
+                <h1 className="text-4xl font-extrabold max-sm:col-span-2">Posts</h1>
                 <button
                     className="rounded-[8px] bg-blue-600 px-3.5 py-1"
                     onClick={handleCreatePost}
