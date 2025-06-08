@@ -47,11 +47,23 @@ function CreatePost() {
         }
     }
 
+    const handleGoBack = () => {
+        navigate('/')
+    }
+
     return (
         <>
             <NavBar>
-                <div className="mt-4 flex w-180 flex-col gap-5 self-center">
+                <div className=" mx-6 mt-4 flex max-w-180 flex-col gap-5 self-center">
+                    <div className="flex justify-between">
                     <p className="text-3xl">Create a Post</p>
+                        <button
+                            className="rounded-[8px] bg-blue-600 px-3.5 py-1"
+                            onClick={handleGoBack}
+                        >
+                            Go Back!
+                        </button>
+                    </div>
                     <input
                         className="bg-neutral-700 px-2 py-1 text-2xl"
                         type="text"
