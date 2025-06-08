@@ -75,7 +75,7 @@ function AllPosts() {
     return (
         <>
             <NavBar>
-                <div className="mt-2 flex w-180 flex-col gap-5 self-center">
+                <div className="mx-5 mt-2 flex max-w-180 flex-col gap-5 self-center">
                     <div className="flex justify-between">
                         <h1 className="text-4xl font-extrabold">Posts</h1>
                         <button
