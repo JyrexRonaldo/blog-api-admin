@@ -158,7 +158,7 @@ function PostItem() {
                     <p
                         dangerouslySetInnerHTML={{ __html: postItemData.body }}
                     ></p>
-                    <div className="flex justify-between gap-20 font-extralight">
+                    <div className="flex justify-between gap-2 font-extralight max-sm:grid max-sm:grid-cols-2 max-sm:grid-rows-2">
                         <button
                             type="button"
                             onClick={handleCommentDisplay}
@@ -187,6 +187,7 @@ function PostItem() {
                             />
                             <p>Edit</p>
                         </button>
+
                         <button
                             className="flex cursor-pointer items-center gap-1.5"
                             type="button"
