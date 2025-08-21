@@ -112,13 +112,13 @@ function PostItem() {
 
     if (loading)
         return (
-            <div className="mt-52 flex items-center justify-center">
+            <div className="mt-52 flex items-center justify-center text-white">
                 <p>Loading...</p>
             </div>
         )
     if (error)
         return (
-            <div className="mt-52 flex items-center justify-center">
+            <div className="mt-52 flex items-center justify-center text-white">
                 <p>A network error was encountered</p>
             </div>
         )
@@ -148,12 +148,24 @@ function PostItem() {
         navigate('/')
     }
 
+    const handleEditButton = () => {
+        console.log('Okay')
+        const postData = {
+            title: postItemData.title,
+            body: postItemData.body,
+            publishStatus: postItemData.status,
+            postId: postItemData.id,
+        }
+        localStorage.setItem('postData', JSON.stringify(postData))
+        navigate('/new')
+    }
+
     return (
         <>
             <NavBar>
-                <div className=' mt-2   self-center'>
+                <div className="mt-2 self-center">
                     <div className="flex justify-end">
-                    {/* <p className="text-3xl">Create a Post</p> */}
+                        {/* <p className="text-3xl">Create a Post</p> */}
                         <button
                             className="rounded-[8px] bg-blue-600 px-3.5 py-1"
                             onClick={handleGoBack}
@@ -161,7 +173,7 @@ function PostItem() {
                             Go Back!
                         </button>
                     </div>
-                    <div className=" mt-2 flex max-w-180 flex-col gap-3 self-center rounded-[12px] bg-neutral-800 p-5.5">
+                    <div className="mt-2 flex max-w-180 flex-col gap-3 self-center rounded-[12px] bg-neutral-800 p-5.5">
                         <p className="text-4xl font-extrabold">
                             {postItemData.title}
                         </p>
@@ -195,6 +207,7 @@ function PostItem() {
                             <button
                                 className="flex cursor-pointer items-center gap-1.5"
                                 type="button"
+                                onClick={handleEditButton}
                             >
                                 <img
                                     className="h-auto w-3.5"

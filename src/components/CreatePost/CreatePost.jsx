@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useRef } from 'react'
-import { Editor } from '@tinymce/tinymce-react';
+import { Editor } from '@tinymce/tinymce-react'
 import NavBar from '../NavBar/NavBar'
 
 function CreatePost() {
@@ -8,6 +8,9 @@ function CreatePost() {
     const [publishStatus, setPublishStatus] = useState(false)
     const navigate = useNavigate()
     const editorRef = useRef(null)
+    const [defaultBody, setDefaultBody] = useState('Write something...')
+    const [edit, setEdit] = useState(false)
+    const[editPostId,setEditPostId] = useState('null')
 
     const handleCancel = () => {
         navigate('/')
@@ -18,6 +21,7 @@ function CreatePost() {
     }
 
     const handlePublishStatusSelect = (e) => {
+        console.log(e.target.value)
         setPublishStatus(e.target.value)
     }
 
@@ -47,16 +51,57 @@ function CreatePost() {
         }
     }
 
+    const handleEditSubmission = async () => {
+        console.log(publishStatus)
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_HOME_DOMAIN}/${editPostId}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: postTitle,
+                        body: editorRef.current.getContent(),
+                        authorId: localStorage.getItem('userId'),
+                        status: publishStatus,
+                    }),
+                }
+            )
+
+            const data = await response.json()
+            console.log(data)
+            navigate('/')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const handleGoBack = () => {
         navigate('/')
+    }
+
+    console.log(JSON.parse(localStorage.getItem('postData')))
+
+    let editData = JSON.parse(localStorage.getItem('postData'))
+
+    if (editData !== null) {
+        setPostTitle(editData.title)
+        setPublishStatus(editData.publishStatus)
+        setDefaultBody(editData.body)
+        setEdit(true)
+        setEditPostId(editData.postId)
+        console.log(editData.id)
+        localStorage.removeItem('postData')
     }
 
     return (
         <>
             <NavBar>
-                <div className=" mx-6 mt-4 flex max-w-180 flex-col gap-5 self-center">
+                <div className="mx-6 mt-4 flex max-w-180 flex-col gap-5 self-center">
                     <div className="flex justify-between">
-                    <p className="text-3xl">Create a Post</p>
+                        <p className="text-3xl">Create a Post</p>
                         <button
                             className="rounded-[8px] bg-blue-600 px-3.5 py-1"
                             onClick={handleGoBack}
@@ -77,7 +122,7 @@ function CreatePost() {
                         tinymceScriptSrc="/tinymce/tinymce.min.js"
                         licenseKey="ly4nwxdyn8wjevdo4ms58u5e0tm3bngx3nxsvbed2lk0uz60"
                         onInit={(_evt, editor) => (editorRef.current = editor)}
-                        initialValue="<p>Write something...</p>"
+                        initialValue={`<p>${defaultBody}</p>`}
                         init={{
                             height: 500,
                             menubar: false,
@@ -130,12 +175,18 @@ function CreatePost() {
                         >
                             Cancel
                         </button>
-                        <button
+
+                        { edit ? <button
+                            onClick={handleEditSubmission}
+                            className="rounded-[8px] bg-blue-600 px-3.5 py-1"
+                        >
+                            Edit
+                        </button> :  <button
                             onClick={handlePostSubmission}
                             className="rounded-[8px] bg-blue-600 px-3.5 py-1"
                         >
                             Create
-                        </button>
+                        </button>}
                     </div>
                 </div>
             </NavBar>
