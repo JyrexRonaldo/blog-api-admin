@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 function RegisterForm() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate()
 
     const handleUsernameInput = (e) => {
@@ -15,21 +16,28 @@ function RegisterForm() {
     }
 
     const handleRegisterButton = async () => {
+        if ( password === '' || username === '' ) {
+            setErrorMessage("Username and password fields cannot be empty")
+            return
+        }
         try {
-            const response = await fetch(`${import.meta.env.VITE_HOME_DOMAIN}/auth/sign-up`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            })
+            const response = await fetch(
+                `${import.meta.env.VITE_HOME_DOMAIN}/auth/sign-up`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password }),
+                }
+            )
 
             const data = await response.json()
             console.log(data)
             localStorage.setItem('userToken', `${data.token}`)
-                localStorage.setItem('userId', `${data.userId}`)
-                localStorage.setItem('userRole', `${data.userRole}`)
-                navigate('/')
+            localStorage.setItem('userId', `${data.userId}`)
+            localStorage.setItem('userRole', `${data.userRole}`)
+            navigate('/')
         } catch (error) {
             console.log(error)
         }
@@ -80,6 +88,7 @@ function RegisterForm() {
                     <Link to="/login" className="text-blue-500">
                         Login
                     </Link>
+                    <p className="text-sm text-red-400">{errorMessage}</p>
                 </p>
             </form>
         </div>
