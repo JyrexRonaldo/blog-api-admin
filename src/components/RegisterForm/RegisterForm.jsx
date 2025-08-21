@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function RegisterForm() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [successMessage, setSuccessMessage] = useState(null)
+    const navigate = useNavigate()
 
     const handleUsernameInput = (e) => {
         setUsername(e.target.value)
@@ -26,7 +26,10 @@ function RegisterForm() {
 
             const data = await response.json()
             console.log(data)
-            setSuccessMessage(data)
+            localStorage.setItem('userToken', `${data.token}`)
+                localStorage.setItem('userId', `${data.userId}`)
+                localStorage.setItem('userRole', `${data.userRole}`)
+                navigate('/')
         } catch (error) {
             console.log(error)
         }
@@ -35,9 +38,6 @@ function RegisterForm() {
     return (
         <div className="mt-30 flex w-80 flex-col items-center self-center rounded-2xl bg-neutral-700 p-8">
             <h1 className="text-2xl font-extrabold">Register an account</h1>
-            {successMessage ? (
-                <p className="text-center text-green-500">{successMessage}</p>
-            ) : null}
             <form className="flex flex-col gap-2">
                 <div className="flex flex-col gap-1">
                     <label htmlFor="username" className="font-light">

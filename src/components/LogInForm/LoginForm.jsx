@@ -16,20 +16,27 @@ function LoginForm() {
 
     const handleLoginButton = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_HOME_DOMAIN}/auth/log-in`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            })
+            const response = await fetch(
+                `${import.meta.env.VITE_HOME_DOMAIN}/auth/log-in`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password }),
+                }
+            )
 
             const data = await response.json()
             console.log(data)
-            localStorage.setItem('userToken', `${data.token}`)
-            localStorage.setItem('userId', `${data.userId}`)
-            localStorage.setItem('userRole', `${data.userRole}`)
-            navigate('/')
+            if (data.message === 'User not found') {
+                navigate('/register')
+            } else {
+                localStorage.setItem('userToken', `${data.token}`)
+                localStorage.setItem('userId', `${data.userId}`)
+                localStorage.setItem('userRole', `${data.userRole}`)
+                navigate('/')
+            }
         } catch (error) {
             console.log(error)
         }
