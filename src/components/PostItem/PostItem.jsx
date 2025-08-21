@@ -144,106 +144,123 @@ function PostItem() {
 
     const createdAt = format(new Date(postItemData.createdAt), 'MMMM dd, yyyy')
 
+    const handleGoBack = () => {
+        navigate('/')
+    }
+
     return (
         <>
             <NavBar>
-                <div className="mx-5 mt-2 flex max-w-180 flex-col gap-3 self-center rounded-[12px] bg-neutral-800 p-5.5">
-                    <p className="text-4xl font-extrabold">
-                        {postItemData.title}
-                    </p>
-                    <div className="flex gap-4">
-                        <p>{postItemData.author.username}</p>
-                        <p>Posted on: {createdAt}</p>
-                    </div>
-                    <p
-                        dangerouslySetInnerHTML={{ __html: postItemData.body }}
-                    ></p>
-                    <div className="flex justify-between gap-2 font-extralight max-sm:grid max-sm:grid-cols-2 max-sm:grid-rows-2">
+                <div className=' mt-2   self-center'>
+                    <div className="flex justify-end">
+                    {/* <p className="text-3xl">Create a Post</p> */}
                         <button
-                            type="button"
-                            onClick={handleCommentDisplay}
-                            className="flex cursor-pointer items-center gap-1.5"
+                            className="rounded-[8px] bg-blue-600 px-3.5 py-1"
+                            onClick={handleGoBack}
                         >
-                            <img
-                                className="h-auto w-3.5"
-                                src={commentIcon}
-                                alt="comment icon"
-                            />
-                            <p>
-                                {postItemData._count.comments}{' '}
-                                {postItemData._count.comments > 1
-                                    ? 'Comments'
-                                    : 'Comment'}
-                            </p>
-                        </button>
-                        <button
-                            className="flex cursor-pointer items-center gap-1.5"
-                            type="button"
-                        >
-                            <img
-                                className="h-auto w-3.5"
-                                src={editFileIcon}
-                                alt="comment icon"
-                            />
-                            <p>Edit</p>
-                        </button>
-
-                        <button
-                            className="flex cursor-pointer items-center gap-1.5"
-                            type="button"
-                            onClick={handlePublishStatus}
-                        >
-                            {postItemData.status ? (
-                                <>
-                                    <img
-                                        className="h-auto w-3.5"
-                                        src={unpublishIcon}
-                                        alt="comment icon"
-                                    />
-                                    <p>Unpublish</p>
-                                </>
-                            ) : (
-                                <>
-                                    <img
-                                        className="h-auto w-3.5"
-                                        src={PublishIcon}
-                                        alt="comment icon"
-                                    />
-                                    <p>Publish</p>
-                                </>
-                            )}
-                        </button>
-                        <button
-                            onClick={handleRemovePost}
-                            className="flex cursor-pointer items-center gap-1.5"
-                            type="button"
-                        >
-                            <img
-                                className="h-auto w-3.5"
-                                src={removeIcon}
-                                alt="comment icon"
-                            />
-                            <p>Remove</p>
+                            Go Back!
                         </button>
                     </div>
-
-                    {show && (
-                        <div className="flex flex-col gap-3">
-                            <p>Comments ({postItemData._count.comments})</p>
-                            <Textarea
-                                textBoxValue={comment}
-                                textFieldHandler={handleCommentTextarea}
-                                sendButtonHandler={handleCommentPost}
-                                placeholderText={'Leave a comment...'}
-                            ></Textarea>
-                            <CommentList
-                                postId={itemId}
-                                newComment={newComment}
-                                deletedCommentId={deletedCommentId}
-                                setDeletedCommentId={setDeletedCommentId}
-                            />
+                    <div className=" mt-2 flex max-w-180 flex-col gap-3 self-center rounded-[12px] bg-neutral-800 p-5.5">
+                        <p className="text-4xl font-extrabold">
+                            {postItemData.title}
+                        </p>
+                        <div className="flex gap-4">
+                            <p>{postItemData.author.username}</p>
+                            <p>Posted on: {createdAt}</p>
                         </div>
-                    )}
+                        <p
+                            dangerouslySetInnerHTML={{
+                                __html: postItemData.body,
+                            }}
+                        ></p>
+                        <div className="flex justify-between gap-2 font-extralight max-sm:grid max-sm:grid-cols-2 max-sm:grid-rows-2">
+                            <button
+                                type="button"
+                                onClick={handleCommentDisplay}
+                                className="flex cursor-pointer items-center gap-1.5"
+                            >
+                                <img
+                                    className="h-auto w-3.5"
+                                    src={commentIcon}
+                                    alt="comment icon"
+                                />
+                                <p>
+                                    {postItemData._count.comments}{' '}
+                                    {postItemData._count.comments > 1
+                                        ? 'Comments'
+                                        : 'Comment'}
+                                </p>
+                            </button>
+                            <button
+                                className="flex cursor-pointer items-center gap-1.5"
+                                type="button"
+                            >
+                                <img
+                                    className="h-auto w-3.5"
+                                    src={editFileIcon}
+                                    alt="comment icon"
+                                />
+                                <p>Edit</p>
+                            </button>
+
+                            <button
+                                className="flex cursor-pointer items-center gap-1.5"
+                                type="button"
+                                onClick={handlePublishStatus}
+                            >
+                                {postItemData.status ? (
+                                    <>
+                                        <img
+                                            className="h-auto w-3.5"
+                                            src={unpublishIcon}
+                                            alt="comment icon"
+                                        />
+                                        <p>Unpublish</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <img
+                                            className="h-auto w-3.5"
+                                            src={PublishIcon}
+                                            alt="comment icon"
+                                        />
+                                        <p>Publish</p>
+                                    </>
+                                )}
+                            </button>
+                            <button
+                                onClick={handleRemovePost}
+                                className="flex cursor-pointer items-center gap-1.5"
+                                type="button"
+                            >
+                                <img
+                                    className="h-auto w-3.5"
+                                    src={removeIcon}
+                                    alt="comment icon"
+                                />
+                                <p>Remove</p>
+                            </button>
+                        </div>
+
+                        {show && (
+                            <div className="flex flex-col gap-3">
+                                <p>Comments ({postItemData._count.comments})</p>
+                                <Textarea
+                                    textBoxValue={comment}
+                                    textFieldHandler={handleCommentTextarea}
+                                    sendButtonHandler={handleCommentPost}
+                                    placeholderText={'Leave a comment...'}
+                                ></Textarea>
+                                <CommentList
+                                    postId={itemId}
+                                    newComment={newComment}
+                                    deletedCommentId={deletedCommentId}
+                                    setDeletedCommentId={setDeletedCommentId}
+                                />
+                            </div>
+                        )}
+                    </div>
                 </div>
             </NavBar>
         </>
