@@ -47,6 +47,7 @@ function RegisterForm() {
                         type="text"
                         name="username"
                         id="username"
+                        autoComplete="username"
                         value={username}
                         onChange={handleUsernameInput}
                         className="w-full bg-neutral-800"
@@ -61,6 +62,7 @@ function RegisterForm() {
                         type="password"
                         name="password"
                         id="password"
+                        autoComplete="current-password"
                         value={password}
                         onChange={handlePasswordInput}
                         className="w-full bg-neutral-800"
