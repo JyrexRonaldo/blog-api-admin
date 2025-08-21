@@ -16,6 +16,10 @@ function LoginForm() {
     }
 
     const handleLoginButton = async () => {
+        if ( password === '' || username === '' ) {
+            setErrorMessage("Username and password fields cannot be empty")
+            return
+        }
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_HOME_DOMAIN}/auth/log-in`,
@@ -31,7 +35,8 @@ function LoginForm() {
             const data = await response.json()
             console.log(data)
             if (data.message === 'User not found') {
-                navigate('/register')
+                setErrorMessage('User not found')
+                return 
             } else if (data.message === 'Wrong Password!!!') {
                 setErrorMessage('Wrong Password!!!')
                 return
@@ -91,7 +96,7 @@ function LoginForm() {
                     Register
                 </Link>
             </p>
-            <p className="text-sm text-red-700">{errorMessage}</p>
+            <p className="text-sm text-red-400">{errorMessage}</p>
         </div>
     )
 }

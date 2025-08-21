@@ -38,13 +38,13 @@ function AllPosts() {
 
     if (loading)
         return (
-            <div className="mt-52 flex items-center justify-center">
+            <div className="mt-52 flex items-center justify-center text-white">
                 <p>Loading...</p>
             </div>
         )
     if (error)
         return (
-            <div className="mt-52 flex items-center justify-center">
+            <div className="mt-52 flex items-center justify-center text-white">
                 <p>A network error was encountered</p>
             </div>
         )
